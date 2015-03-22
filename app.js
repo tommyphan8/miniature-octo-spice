@@ -1,9 +1,9 @@
 var express = require("express"),
-    http = require("http"),
-    app = express(),
-    bodyParser = require('body-parser'),
-    fs = require('fs')
-    ;
+http = require("http"),
+app = express(),
+bodyParser = require('body-parser'),
+fs = require('fs')
+;
 
     /*
 session = require('express-session'),
@@ -11,11 +11,13 @@ session = require('express-session'),
     app.use(cookieParser());
 app.use(session({secret: '473'})); 
 
-    */
-var userDB =[];
+*/
+var userDB =[{"username": "tommy", "password": "123456", "movie": ["the matrix", "saving private ryan"], "game": [0], "books": [0]}];
 var loginUser =[];
+
 app.use('/public',  express.static(__dirname + '/public'));
-  
+
+
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -27,7 +29,27 @@ var User = require('./User.js');
 // create HTTP server/
 http.createServer(app).listen(3000);
 
-app.post('/getLoginUser.json',function (req, res) {
+app.post("/signIn", function (req, res) {
+    var login = req.body;
+
+    userDB.forEach(function(element) {
+        if (login.username === element.username) {
+
+            if (login.password === element.password) {
+                console.log(element);
+                res.json(element);
+            }
+
+        } 
+
+    });
+    console.log(login.username);
+    console.log("logged in!");
+
+    //res.json({"message":"You posted to the server!"});
+});
+
+/*app.post('/getLoginUser.json',function (req, res) {
         //must be change to session 
         console.log('loginUser:'+loginUser);
         if(loginUser.length > 0) res.json(JSON.stringify(loginUser[0]));
@@ -53,7 +75,7 @@ app.post("/signup.show", function (req, res) {
 app.get("/signup.show", function (req, res) {
     console.log('in get /signup.show')
     res.sendFile('public/signup.html', {root: __dirname });
-});
+});*/
 app.get("/", function (req, res) {
     res.sendFile('public/index.html', {root: __dirname });
 });
