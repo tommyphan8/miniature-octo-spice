@@ -12,7 +12,7 @@ session = require('express-session'),
 app.use(session({secret: '473'})); 
 
 */
-var userDB =[{"username": "tommy", "password": "123456", "movie": ["the matrix", "saving private ryan"], "game": [], "books": []}];
+var userDB =[{"username": "tommy", "password": "123456", "movie": ["the matrix", "saving private ryan"], "game": ["gta", "final fantasy vii", "wow"], "books": []}];
 var loginUser =[];
 
 app.use('/public',  express.static(__dirname + '/public'));

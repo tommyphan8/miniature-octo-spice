@@ -184,17 +184,17 @@ var listManage = function(currentUser) {
 					currentUser.movie.push($input.val());
 					$input.val("");
 					$(".col-md-4 .movie").empty();
-					displayMovie(movies)
+					displayMovie(currentUser);
 				} else if ($select.val() === "Games") {
 					currentUser.game.push($input.val());
 					$input.val("");
 					$(".col-md-4 .game").empty();
-					displayGames(currentUser)
+					displayGames(currentUser);
 				} else if ($select.val() === "Books") {
-					currentUser.book.push($input.val());
+					currentUser.books.push($input.val());
 					$input.val("");
 					$(".col-md-4 .book").empty();
-					displayBooks(currentUser)
+					displayBooks(currentUser);
 				}
 
 			}
