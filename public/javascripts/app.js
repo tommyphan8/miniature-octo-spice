@@ -16,7 +16,7 @@ var main = function(){
 
 
 
-	listManage(movies, games, books);
+	//listManage(movies, games, books);
 
 
 
@@ -92,6 +92,7 @@ var homePage1 = function(currentUser) {
 		
 		$div.append($content);
 		$(".jumbotron").append($div);
+		listManage(currentUser);
 
 	}
 
@@ -131,35 +132,35 @@ var homePage = function() {
 
 };
 
-var listManage = function(movies, games, books) {
+var listManage = function(currentUser) {
 	
-	var displayMovie = function(movies) {
-		movies.forEach(function (movie) {
+	var displayMovie = function(currentUser) {
+		currentUser.movie.forEach(function (movie) {
 			var $newLI =$("<li>");
 			$newLI.text(movie);
 			$(".col-md-4 .movie").append($newLI);
 		});
 	};
 
-	var displayGames = function(games) {
-		games.forEach(function (game) {
+	var displayGames = function(currentUser) {
+		currentUser.game.forEach(function (game) {
 			var $newLI =$("<li>");
 			$newLI.text(game);
 			$(".col-md-4 .game").append($newLI);
 		});
 	};
 
-	var displayBooks = function(books) {
-		books.forEach(function (book) {
+	var displayBooks = function(currentUser) {
+		currentUser.books.forEach(function (book) {
 			var $newLI =$("<li>");
 			$newLI.text(book);
 			$(".col-md-4 .book").append($newLI);
 		});
 	};
 	
-	displayMovie(movies);
-	displayGames(games);
-	displayBooks(books);
+	displayMovie(currentUser);
+	displayGames(currentUser);
+	displayBooks(currentUser);
 		
 
 	$("main .tabs a").on("click", function () {
@@ -180,20 +181,20 @@ var listManage = function(movies, games, books) {
 			if ($input.val() != "") {
 				if($select.val() === "Movies") {
 					console.log("hello");
-					movies.push($input.val());
+					currentUser.movie.push($input.val());
 					$input.val("");
 					$(".col-md-4 .movie").empty();
 					displayMovie(movies)
 				} else if ($select.val() === "Games") {
-					games.push($input.val());
+					currentUser.game.push($input.val());
 					$input.val("");
 					$(".col-md-4 .game").empty();
-					displayGames(games)
+					displayGames(currentUser)
 				} else if ($select.val() === "Books") {
-					books.push($input.val());
+					currentUser.book.push($input.val());
 					$input.val("");
 					$(".col-md-4 .book").empty();
-					displayBooks(books)
+					displayBooks(currentUser)
 				}
 
 			}
