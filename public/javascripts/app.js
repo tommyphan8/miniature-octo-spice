@@ -76,7 +76,7 @@ var signin = function(currentUser, callback) {
 		});
 		
 	});
-	
+
 
 
 };
@@ -141,15 +141,15 @@ var listManage = function(currentUser) {
 	$(".container .tabs #add").append($("<span>").text("Add"));
 
 	var $select = $("<select>").attr("id", "single");
-		var $input = $("<input>");
-		var $button = $("<button>").text("+");
+	var $input = $("<input>");
+	var $button = $("<button>").text("+");
 
-		var $option = $("<option>").attr("value", "Movies").text("Movies");
-		var $option1 = $("<option>").attr("value", "Games").text("Games");
-		var $option2 = $("<option>").attr("value", "Books").text("Books");
-		$select.append($option).append($option1).append($option2);
-		$content = $("<div>").append($input).append($button).append($select);
-		$("main .content").append($content);
+	var $option = $("<option>").attr("value", "Movies").text("Movies");
+	var $option1 = $("<option>").attr("value", "Games").text("Games");
+	var $option2 = $("<option>").attr("value", "Books").text("Books");
+	$select.append($option).append($option1).append($option2);
+	$content = $("<div>").append($input).append($button).append($select);
+	$("main .content").append($content);
 
 	
 	var displayMovie = function(currentUser) {
@@ -180,7 +180,8 @@ var listManage = function(currentUser) {
 	displayGames(currentUser);
 	displayBooks(currentUser);
 	
-	$button.on("click", function () {
+	$("main button").on("click", function () {
+		console.log("CLICK!");
 		if ($input.val() != "") {
 			if($select.val() === "Movies") {
 				console.log("hello");
@@ -190,6 +191,7 @@ var listManage = function(currentUser) {
 				displayMovie(currentUser);
 				$.post("updateMovie", currentUser, function(response) {
 					console.log("works");
+					
 				});
 			} else if ($select.val() === "Games") {
 				currentUser.game.push($input.val());

@@ -55,8 +55,9 @@ app.post("/updateMovie", function (req, res) {
     userDB.forEach(function(element, index, array) {
         if (currentUser.username === element.username) {
             console.log("success");
-            array[index] = currentUser;
+            array[index].movie = currentUser.movie;
             console.log(array[index]);
+            res.json("works");
         }
     });
 
