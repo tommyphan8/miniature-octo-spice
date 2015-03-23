@@ -76,6 +76,8 @@ var signin = function(currentUser, callback) {
 		});
 		
 	});
+	
+
 
 };
 
@@ -133,6 +135,22 @@ var homePage = function() {
 };
 
 var listManage = function(currentUser) {
+	$(".container .row #movies").text("Movies");
+	$(".container .row #games").text("Games");
+	$(".container .row #books").text("Books");
+	$(".container .tabs #add").append($("<span>").text("Add"));
+
+	var $select = $("<select>").attr("id", "single");
+		var $input = $("<input>");
+		var $button = $("<button>").text("+");
+
+		var $option = $("<option>").attr("value", "Movies").text("Movies");
+		var $option1 = $("<option>").attr("value", "Games").text("Games");
+		var $option2 = $("<option>").attr("value", "Books").text("Books");
+		$select.append($option).append($option1).append($option2);
+		$content = $("<div>").append($input).append($button).append($select);
+		$("main .content").append($content);
+
 	
 	var displayMovie = function(currentUser) {
 		currentUser.movie.forEach(function (movie) {
@@ -161,10 +179,36 @@ var listManage = function(currentUser) {
 	displayMovie(currentUser);
 	displayGames(currentUser);
 	displayBooks(currentUser);
-		
+	
+	$button.on("click", function () {
+		if ($input.val() != "") {
+			if($select.val() === "Movies") {
+				console.log("hello");
+				currentUser.movie.push($input.val());
+				$input.val("");
+				$(".col-md-4 .movie").empty();
+				displayMovie(currentUser);
+				$.post("updateMovie", currentUser, function(response) {
+					console.log("works");
+				});
+			} else if ($select.val() === "Games") {
+				currentUser.game.push($input.val());
+				$input.val("");
+				$(".col-md-4 .game").empty();
+				displayGames(currentUser);
+			} else if ($select.val() === "Books") {
+				currentUser.books.push($input.val());
+				$input.val("");
+				$(".col-md-4 .book").empty();
+				displayBooks(currentUser);
+			}
 
-	$("main .tabs a").on("click", function () {
-		$("main .content").empty();
+		}
+
+	});	
+
+/*	$(".tabs a").on("click", function () {
+		$(".container .content").empty();
 		console.log("clicked");
 		var $select = $("<select>").attr("id", "single");
 		var $input = $("<input>");
@@ -177,30 +221,8 @@ var listManage = function(currentUser) {
 		$content = $("<div>").append($input).append($button).append($select);
 		$("main .content").append($content);
 
-		$button.on("click", function () {
-			if ($input.val() != "") {
-				if($select.val() === "Movies") {
-					console.log("hello");
-					currentUser.movie.push($input.val());
-					$input.val("");
-					$(".col-md-4 .movie").empty();
-					displayMovie(currentUser);
-				} else if ($select.val() === "Games") {
-					currentUser.game.push($input.val());
-					$input.val("");
-					$(".col-md-4 .game").empty();
-					displayGames(currentUser);
-				} else if ($select.val() === "Books") {
-					currentUser.books.push($input.val());
-					$input.val("");
-					$(".col-md-4 .book").empty();
-					displayBooks(currentUser);
-				}
-
-			}
-
-		});
-	});
+		
+	});*/
 
 	// $(".row h2 a span").toArray().forEach(function (element) {
 	// 	// create a click handler for this element

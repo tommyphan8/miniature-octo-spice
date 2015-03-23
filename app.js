@@ -49,6 +49,19 @@ app.post("/signIn", function (req, res) {
     //res.json({"message":"You posted to the server!"});
 });
 
+app.post("/updateMovie", function (req, res) {
+    var currentUser = req.body;
+
+    userDB.forEach(function(element, index, array) {
+        if (currentUser.username === element.username) {
+            console.log("success");
+            array[index] = currentUser;
+            console.log(array[index]);
+        }
+    });
+
+});
+
 /*app.post('/getLoginUser.json',function (req, res) {
         //must be change to session 
         console.log('loginUser:'+loginUser);
