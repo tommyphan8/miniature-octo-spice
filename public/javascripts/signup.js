@@ -1,5 +1,33 @@
 var main= function () {
     "use strict";
+    submit();
+    //test();
+};
+
+function submit() {
+  var submitInfo = {"fname": "", "lname": "", "pword": "", "uname": "", "bmonth": "", "bday": "", "byear": "", "gender": ""};
+  $("#button").on("click", function () {
+
+    
+    if (validation() === true)
+    {
+      submitInfo.fname = $("#firstName").val();
+      submitInfo.lname = $("#lastName").val();
+      submitInfo.pword = $("#password").val(); 
+      submitInfo.uname = $("#email").val(); 
+      submitInfo.bmonth = $("#month").val(); 
+      submitInfo.bday = $("#day").val();
+      submitInfo.byear = $("#year").val();
+      submitInfo.fname = $("#firstName").val();
+      submitInfo.gender = $(".gender").val();
+      console.log(submitInfo);
+      $.post("signup", submitInfo, function (response) {
+        
+      });
+
+    }
+    
+  });
 };
 
 function validation(){
@@ -83,6 +111,6 @@ function validation(){
    
 return true;
   
-}   
+}; 
 
 $(document).ready(main);

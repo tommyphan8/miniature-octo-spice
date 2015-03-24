@@ -12,7 +12,9 @@ session = require('express-session'),
 app.use(session({secret: '473'})); 
 
 */
-var userDB =[{"username": "tommy", "password": "123456", "movie": ["the matrix", "saving private ryan"], "game": ["gta", "final fantasy vii", "wow"], "books": []}];
+var userDB =[{"fname": "Tommy", "lname": "Phan", "username": "tommy", "password": "123456", 
+"movie": ["the matrix", "saving private ryan"], "game": 
+["gta", "final fantasy vii", "wow"], "books": []}];
 var loginUser =[];
 
 app.use('/public',  express.static(__dirname + '/public'));
@@ -28,6 +30,23 @@ var User = require('./User.js');
 
 // create HTTP server/
 http.createServer(app).listen(3000);
+
+
+
+app.post("/public/signup", function (req, res) {
+    var newUser = {"fname": "", "lname": "", "username": "", "password": "", 
+    "movie": [], "game": [], "books": []}
+    var temp = req.body;
+
+    newUser.fname = temp.fname;
+    newUser.lname = temp.lname;
+    newUser.password = temp.pword;
+    newUser.username = temp.uname;
+    userDB.push(newUser);
+    console.log(userDB);
+    console.log(temp);
+    res.sendFile('public/index.html', {root: __dirname });
+});
 
 app.post("/signIn", function (req, res) {
     var login = req.body;
@@ -62,6 +81,8 @@ app.post("/updateMovie", function (req, res) {
     });
 
 });
+
+
 
 /*app.post('/getLoginUser.json',function (req, res) {
         //must be change to session 

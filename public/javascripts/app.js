@@ -90,7 +90,7 @@ var homePage1 = function(currentUser) {
 
 		$(".jumbotron").empty();
 		$div = $("<div>").attr("class", "container");
-		$content = $("<h1>").text("Welcome " + currentUser.username + "!");
+		$content = $("<h1>").text("Welcome " + currentUser.fname + "!");
 		
 		$div.append($content);
 		$(".jumbotron").append($div);
@@ -135,6 +135,8 @@ var homePage = function() {
 };
 
 var listManage = function(currentUser) {
+	$("main .content").empty();
+	$(".container .tabs #add").empty();
 	$(".container .row #movies").text("Movies");
 	$(".container .row #games").text("Games");
 	$(".container .row #books").text("Books");
@@ -153,6 +155,7 @@ var listManage = function(currentUser) {
 
 	
 	var displayMovie = function(currentUser) {
+		$(".col-md-4 .movie").empty();
 		currentUser.movie.forEach(function (movie) {
 			var $newLI =$("<li>");
 			$newLI.text(movie);
@@ -161,6 +164,7 @@ var listManage = function(currentUser) {
 	};
 
 	var displayGames = function(currentUser) {
+		$(".col-md-4 .game").empty();
 		currentUser.game.forEach(function (game) {
 			var $newLI =$("<li>");
 			$newLI.text(game);
@@ -169,7 +173,9 @@ var listManage = function(currentUser) {
 	};
 
 	var displayBooks = function(currentUser) {
+		$(".col-md-4 .book").empty();
 		currentUser.books.forEach(function (book) {
+
 			var $newLI =$("<li>");
 			$newLI.text(book);
 			$(".col-md-4 .book").append($newLI);
